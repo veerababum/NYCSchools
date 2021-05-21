@@ -15,6 +15,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        tableView.backgroundView = nil
         tableView.register(UINib(nibName: "SchoolTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SchoolTableViewCell")
         schoolViewModel = SchoolViewModel()
         fetchSchoolData()
@@ -69,6 +71,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                 schoolDetailsVC.schoolDetailsViewModel = SchoolDetailsViewModel(schoolDetail: schoolDetailsObj)
                 navigationController?.pushViewController(schoolDetailsVC, animated: true)
             }
+        } else {
+           // let alertView  
         }
     }
 }
