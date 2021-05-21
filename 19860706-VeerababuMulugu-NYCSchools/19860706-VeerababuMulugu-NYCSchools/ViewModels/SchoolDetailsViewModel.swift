@@ -24,18 +24,20 @@ class SchoolDetailsViewModel {
     
     var address: String {
         if let addressline1 = schoolDetail.primary_address_line_1,
-            let city = schoolDetail.city,
-            let stateCode = schoolDetail.state_code,
-            let zip = schoolDetail.zip {
-            return  addressline1 + "\n" + city + "\n" +  stateCode + ", " + zip
+           let city = schoolDetail.city,
+           let stateCode = schoolDetail.state_code,
+           let zip = schoolDetail.zip
+        {
+            return addressline1 + "\n" + city + "\n" + stateCode + ", " + zip
         }
         return "Address"
     }
     
     var opportunities: String {
         if let academicopportunities1 = schoolDetail.academicopportunities1,
-            let academicopportunities2 = schoolDetail.academicopportunities2 {
-             return academicopportunities1 + "\n" +  academicopportunities2
+           let academicopportunities2 = schoolDetail.academicopportunities2
+        {
+            return academicopportunities1 + "\n" + academicopportunities2
         }
         return ""
     }
@@ -43,5 +45,4 @@ class SchoolDetailsViewModel {
     var website: String {
         return schoolDetail.website ?? ""
     }
-    
 }

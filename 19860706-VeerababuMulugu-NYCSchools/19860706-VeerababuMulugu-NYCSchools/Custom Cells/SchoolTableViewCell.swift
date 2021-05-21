@@ -8,10 +8,10 @@
 import UIKit
 
 class SchoolTableViewCell: UITableViewCell {
-    @IBOutlet weak var schoolLabel: UILabel!
-    @IBOutlet weak var satReadingAverageScoreLabel: UILabel!
-    @IBOutlet weak var satMathAverageScoreLabel: UILabel!
-    @IBOutlet weak var satWritingAverageScoreLabel: UILabel!
+    @IBOutlet var schoolLabel: UILabel!
+    @IBOutlet var satReadingAverageScoreLabel: UILabel!
+    @IBOutlet var satMathAverageScoreLabel: UILabel!
+    @IBOutlet var satWritingAverageScoreLabel: UILabel!
 
     func setData(school: School) {
         schoolLabel.text = school.school_name + "(" + school.num_of_sat_test_takers + ")"

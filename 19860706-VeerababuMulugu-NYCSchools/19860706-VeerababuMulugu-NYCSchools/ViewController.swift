@@ -8,11 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    var schoolViewModel: SchoolViewModel!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var schoolViewModel: SchoolViewModel!
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "SchoolTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "SchoolTableViewCell")
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
             }
         })
     }
-    
+
     private func fetchSchoolDetailData() {
         activityIndicator.startAnimating()
         SchoolService().getSchoolDetails(completionHandler: { [weak self] schoolDetails in
@@ -47,7 +47,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return schoolViewModel.schools.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SchoolTableViewCell") as? SchoolTableViewCell else {
             return UITableViewCell()
@@ -58,15 +58,16 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         if activityIndicator.isAnimating {
             return
         }
         let school = schoolViewModel.schools[indexPath.row]
-        if let schoolDetailsObj = schoolViewModel.schoolDetails.filter( {$0.dbn == school.dbn } ).first {
+        if let schoolDetailsObj = schoolViewModel.schoolDetails.filter({ $0.dbn == school.dbn }).first {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let schoolDetailsVC = storyboard.instantiateViewController(identifier: "SchoolDetailsViewController") as? SchoolDetailsViewController {
                 schoolDetailsVC.schoolDetailsViewModel = SchoolDetailsViewModel(schoolDetail: schoolDetailsObj)
-                self.navigationController?.pushViewController(schoolDetailsVC, animated: true)
+                navigationController?.pushViewController(schoolDetailsVC, animated: true)
             }
         }
     }
